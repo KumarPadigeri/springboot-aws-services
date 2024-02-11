@@ -4,29 +4,11 @@ cloud:
       static: us-east-1
       auto: false
     credentials:
-      access-key: AKIAVDCEONAUMGZMHDYJ
-      secret-key: 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
+      access-key: ${ACCESS_KEY}
+      secret-key: ${SECRET_KEY}
     end-point:
-      uri: https://sqs.us-east-1.amazonaws.com/350183385128/springboot-testing-queue
+      uri: ${QUEUE_END_POINT}
 spring:
-  quartz:
-    job-store-type: jdbc
-    properties:
-      org:
-        quartz:
-          scheduler:
-            id: AUTO
-
-            instanceName: myScheduler
-
-          jobStore:
-#            class: org.quartz.impl.jdbcjobstore.JobStoreTX
-            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
-            tablePrefix: QRTZ_
-            isClustered: true
-    jdbc:
-      initialize-schema: always
-  #            dataSource: aa
   datasource:
     username: root
     password: ${DB_PWD}
