@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "info": {
     "version": "1.0.0",
-    "title": "Test API Details",
+    "title": "AWS API Details",
     "license": {
       "name": "###"
     }
@@ -121,7 +121,7 @@
         }
       }
     },
-    "/kafka/sendMsg/{message}": {
+    "/aws/sqs/sendMsg/{message}": {
       "get": {
         "parameters": [
           {
@@ -134,98 +134,14 @@
             "description": "Message"
           }
         ],
-        "summary": "Sending msg to kafka",
-        "operationId": "sendMsgToKafka",
+        "summary": "Sending msg to sqs",
+        "operationId": "sendMsgToSQS",
         "tags": [
-          "kafka"
+          "sqs"
         ],
         "responses": {
           "200": {
-            "description": "Sending msg to kafka",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/kafka/sendObject": {
-      "post": {
-        "summary": "Add a new pet",
-        "operationId": "sendObjectToKafka",
-        "tags": [
-          "kafka"
-        ],
-        "requestBody": {
-          "description": "Optional description in *Markdown*",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Student"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "A paged array of Alphabets ",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/kafka/sendMsgToSpecificPartition/{message}": {
-      "get": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "message",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Message"
-          }
-        ],
-        "summary": "Sending msg to kafka",
-        "operationId": "sendMsgToSpecificPartition",
-        "tags": [
-          "kafka"
-        ],
-        "responses": {
-          "200": {
-            "description": "Sending msg to kafka",
+            "description": "Sending msg to sqs",
             "content": {
               "application/json": {
                 "schema": {
@@ -261,42 +177,6 @@
             "format": "int32"
           },
           "message": {
-            "type": "string"
-          }
-        }
-      },
-      "Jobs": {
-        "properties": {
-          "jobID": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "appliedon": {
-            "type": "string"
-          },
-          "count": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "lastModifiedDate": {
-            "type": "string"
-          }
-        }
-      },
-      "Student": {
-        "properties": {
-          "studentID": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "name": {
-            "type": "string"
-          },
-          "age": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "dob": {
             "type": "string"
           }
         }

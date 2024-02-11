@@ -1,6 +1,6 @@
 package com.practice.config;
 
-import com.twilio.Twilio;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,8 +30,6 @@ public class SecurityConfig {
 
     public SecurityConfig(ApplicationProperties applicationProperties) {
         this.applicationProperties = applicationProperties;
-        Twilio.init(applicationProperties.getTwilio().getAccountSid(), applicationProperties.getTwilio().getAuthToken());
-        log.info("Twilio Initialization.......");
     }
 
     private static final String[] AUTH_WHITELIST = {
@@ -86,13 +84,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
-                .cors().and()
+
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(AUTH_WHITELIST).permitAll()
+                        .requestMatchers("/management/**").hasRole("ADMIN")
                         .requestMatchers("/test/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/pet/**").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers("/management/**").hasRole("ADMIN")
+                        .requestMatchers(" /aws/sqs/**").hasAnyRole("USER", "ADMIN")
                         .anyRequest().authenticated()
                 )
                 .httpBasic(withDefaults())

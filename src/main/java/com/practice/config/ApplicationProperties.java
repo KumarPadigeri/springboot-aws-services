@@ -1,6 +1,7 @@
 package com.practice.config;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -17,14 +18,9 @@ import org.springframework.context.annotation.Configuration;
 public class ApplicationProperties {
 
     private Auth auth = new Auth();
-    private Twilio twilio = new Twilio();
 
-    @Data
-    public static class Twilio {
-        private String accountSid;
-        private String authToken;
-        private String phoneNumber;
-    }
+
+
 
     @Data
     public static class Roles {
@@ -35,12 +31,14 @@ public class ApplicationProperties {
 
     }
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
     public static class User extends Creds {
 
 
     }
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
     public static class Admin extends Creds {
 

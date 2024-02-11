@@ -16,10 +16,10 @@ import java.util.Map;
 @SpringBootApplication
 @Slf4j
 @EnableScheduling
-public class Springboot3TestProjectApplication {
+public class SpringbootAWSServicesApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Springboot3TestProjectApplication.class, args);
+        SpringApplication.run(SpringbootAWSServicesApplication.class, args);
     }
 
     @EventListener

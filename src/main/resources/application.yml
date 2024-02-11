@@ -1,19 +1,32 @@
+cloud:
+  aws:
+    region:
+      static: us-east-1
+      auto: false
+    credentials:
+      access-key: AKIAVDCEONAUMGZMHDYJ
+      secret-key: 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
+    end-point:
+      uri: https://sqs.us-east-1.amazonaws.com/350183385128/springboot-testing-queue
 spring:
-  kafka:
-    consumer:
-      bootstrap-servers: localhost:9092  #default port no
-      group-id: sb-group
-  mail:
-    host: smtp.gmail.com
-    password: "gmail app password"
-    username: "springboot3-microservices@gmail.com"
-    port: 587
+  quartz:
+    job-store-type: jdbc
     properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
+      org:
+        quartz:
+          scheduler:
+            id: AUTO
+
+            instanceName: myScheduler
+
+          jobStore:
+#            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+            tablePrefix: QRTZ_
+            isClustered: true
+    jdbc:
+      initialize-schema: always
+  #            dataSource: aa
   datasource:
     username: root
     password: ${DB_PWD}
@@ -35,7 +48,7 @@ spring:
         generate_statistics: true
         dialect: org.hibernate.dialect.MySQL8Dialect
   application:
-    name: springboot3-microservices
+    name: springboot-aws-services
 logging:
   level:
     org:
@@ -51,7 +64,7 @@ management:
 server:
   port: 8081
   servlet:
-    contextPath: /springboot3-microservices
+    contextPath: /springboot-aws-services
 springdoc:
   show-actuator: true
   swagger-ui:
@@ -67,9 +80,8 @@ springdoc:
       paths-to-match: /management/**
     - group: Animal APIs
       paths-to-match: /pet/**
-    - group: Kafka APIs
-      paths-to-match: /kafka/**
-
+    - group: AWS SQS
+      paths-to-match: /aws/sqs/**
 application:
   auth:
     roles:
@@ -79,10 +91,5 @@ application:
       ADMIN:
         username: ${ADMIN_USERNAME}
         password: ${ADMIN_PWD}
-  twilio:
-    accountSid: ${ACCOUNT_SID}
-    authToken: ${AUTH_TOKEN}
-    phoneNumber: ${PHONE_NUMBER}
-
-#http://localhost:8081/springboot3-microservices/documentation
-#http://localhost:8081/springboot3-microservices/swagger-ui/index.html
+#http://localhost:8081/springboot-aws-services/documentation
+#http://localhost:8081/springboot-aws-services/swagger-ui/index.html

@@ -18,7 +18,6 @@ import java.util.List;
 @Service
 @Slf4j
 public class TestService {
-
     public List<String> getAlphabets() {
         List<String> alphabets = new ArrayList<>();
         char c;

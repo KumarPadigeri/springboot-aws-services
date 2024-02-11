@@ -5,15 +5,11 @@ package com.practice.mapper;
  * @User Kumar Padigeri
  */
 
-
-import com.practice.domain.JobsEntity;
-import com.test.model.JobsAO;
 import org.mapstruct.Mapper;
 
 
 @Mapper(componentModel = "spring")
 public interface TestMapper {
 
-    JobsAO jobsEntityToDTO(JobsEntity jobsEntity);
 
 }
